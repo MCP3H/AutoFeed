@@ -1,6 +1,6 @@
 # AutoFeed
 
-  Essa é um proposta de automação na alimentação de animais domésticos, através da configuração de nível da quantidade de ração dentro do pote, este pote também será usado como balança. Caso o animal doméstico se alimente de uma certa quantidade de ração, e ela passe o número configurado, depois de um determinado tempo a alavanca do molde será reaberta, permitindo o preenchimento de ração do pote, quando chegar o nivel configurado a alavanca do pote será fechada.
+  Essa é um proposta de automação na alimentação de animais domésticos, através da configuração de nível da quantidade de ração dentro do pote, que também será utilizado como balança. Caso o animal doméstico se alimente de uma certa quantidade de ração, e ela passe o número configurado, depois de um determinado tempo a alavanca do molde será reaberta, permitindo o preenchimento de ração do pote, quando chegar o nivel configurado a alavanca do pote será fechada.
   
   Por se tratar de uma aplicação desenvolvida no Arduino Uno, utilizamos materiais específicos da plataforma eletrônica para a construção do suporte, segue abaixo uma lista dos elementos que serão usados e suas respectivas funções:
 
@@ -10,7 +10,9 @@
 
 Figura 1 – Arduino Uno R3
 
-![arduinoUno](https://user-images.githubusercontent.com/48319383/85252263-c7ff0e80-b431-11ea-9a75-014a60e08873.png =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252263-c7ff0e80-b431-11ea-9a75-014a60e08873.png" width="300">
+</p>
  
 Fonte: Site Filipeflop
 
@@ -20,7 +22,9 @@ Fonte: Site Filipeflop
 
 Figura 2 – Protoboard
 
-![protoboard](https://user-images.githubusercontent.com/48319383/85252271-c9c8d200-b431-11ea-814d-d130a9a79599.jpg =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252271-c9c8d200-b431-11ea-814d-d130a9a79599.jpg" width="300">
+</p>
 
 Fonte: Site Vida de Silício
 
@@ -30,7 +34,9 @@ Fonte: Site Vida de Silício
 
 Figura 3 – Módulo HX711
 
-![modulohx711](https://user-images.githubusercontent.com/48319383/85252270-c9c8d200-b431-11ea-9c62-647c77a6186b.jpg =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252270-c9c8d200-b431-11ea-9c62-647c77a6186b.jpg" width="300">
+</p>
  
 Fonte: Site Filipeflop
 
@@ -40,7 +46,9 @@ Fonte: Site Filipeflop
 
 Figura 4 – Ethernet Shield
 
-![ethernetShield](https://user-images.githubusercontent.com/48319383/85252266-c9303b80-b431-11ea-8876-a6859b1fa256.jpg =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252266-c9303b80-b431-11ea-8876-a6859b1fa256.jpg" width="300">
+</p>
  
 Fonte: Site Filipeflop
 
@@ -50,7 +58,9 @@ Fonte: Site Filipeflop
 
 Figura 5 – Célula de Carga (1KG)
 
-![celulaCarga](https://user-images.githubusercontent.com/48319383/85252265-c897a500-b431-11ea-8800-bfa4603b3381.jpg =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252265-c897a500-b431-11ea-8800-bfa4603b3381.jpg" width="300">
+</p>
  
 Fonte: Site Magazine Luiza
 
@@ -60,7 +70,9 @@ Fonte: Site Magazine Luiza
 
 Figura 6 – Micro Servo Motor
 
-![servomotor](https://user-images.githubusercontent.com/48319383/85252273-ca616880-b431-11ea-9dcf-79a37cb01220.jpg =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252273-ca616880-b431-11ea-9dcf-79a37cb01220.jpg" width="300">
+</p>
  
 Fonte: Site Vida de Silício
 
@@ -70,7 +82,9 @@ Fonte: Site Vida de Silício
 
 Figura 7 - Jumpers
 
-![jumper](https://user-images.githubusercontent.com/48319383/85252269-c9303b80-b431-11ea-8885-0981dbc33349.jpg =250x)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48319383/85252269-c9303b80-b431-11ea-8885-0981dbc33349.jpg" width="300">
+</p>
  
 Fonte: Site Filipeflop
 
