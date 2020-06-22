@@ -10,7 +10,9 @@
 
 Figura 1 – Arduino Uno R3
 
-![arduinoUno](https://user-images.githubusercontent.com/48319383/85252263-c7ff0e80-b431-11ea-9a75-014a60e08873.png)
+<p align="center">
+  ![arduinoUno](https://user-images.githubusercontent.com/48319383/85252263-c7ff0e80-b431-11ea-9a75-014a60e08873.png =250x250)
+</p>
  
 Fonte: Site Filipeflop
 
@@ -20,7 +22,9 @@ Fonte: Site Filipeflop
 
 Figura 2 – Protoboard
 
-![protoboard](https://user-images.githubusercontent.com/48319383/85252271-c9c8d200-b431-11ea-814d-d130a9a79599.jpg)
+<p align="center">
+  ![protoboard](https://user-images.githubusercontent.com/48319383/85252271-c9c8d200-b431-11ea-814d-d130a9a79599.jpg =250x250)
+</p>
  
 Fonte: Site Vida de Silício
 
@@ -30,7 +34,9 @@ Fonte: Site Vida de Silício
 
 Figura 3 – Módulo HX711
 
-![modulohx711](https://user-images.githubusercontent.com/48319383/85252270-c9c8d200-b431-11ea-9c62-647c77a6186b.jpg)
+<p align="center">
+  ![modulohx711](https://user-images.githubusercontent.com/48319383/85252270-c9c8d200-b431-11ea-9c62-647c77a6186b.jpg =250x250)
+</p>
  
 Fonte: Site Filipeflop
 
@@ -40,7 +46,9 @@ Fonte: Site Filipeflop
 
 Figura 4 – Ethernet Shield
 
-![ethernetShield](https://user-images.githubusercontent.com/48319383/85252266-c9303b80-b431-11ea-8876-a6859b1fa256.jpg)
+<p align="center">
+  ![ethernetShield](https://user-images.githubusercontent.com/48319383/85252266-c9303b80-b431-11ea-8876-a6859b1fa256.jpg =250x250)
+</p>
  
 Fonte: Site Filipeflop
 
@@ -50,7 +58,9 @@ Fonte: Site Filipeflop
 
 Figura 5 – Célula de Carga (1KG)
 
-![celulaCarga](https://user-images.githubusercontent.com/48319383/85252265-c897a500-b431-11ea-8800-bfa4603b3381.jpg)
+<p align="center">
+  ![celulaCarga](https://user-images.githubusercontent.com/48319383/85252265-c897a500-b431-11ea-8800-bfa4603b3381.jpg =250x250)
+</p>
  
 Fonte: Site Magazine Luiza
 
@@ -60,7 +70,9 @@ Fonte: Site Magazine Luiza
 
 Figura 6 – Micro Servo Motor
 
-![servomotor](https://user-images.githubusercontent.com/48319383/85252273-ca616880-b431-11ea-9dcf-79a37cb01220.jpg)
+<p align="center">
+  ![servomotor](https://user-images.githubusercontent.com/48319383/85252273-ca616880-b431-11ea-9dcf-79a37cb01220.jpg =250x250)
+</p>
  
 Fonte: Site Vida de Silício
 
@@ -70,7 +82,9 @@ Fonte: Site Vida de Silício
 
 Figura 7 - Jumpers
 
-![jumper](https://user-images.githubusercontent.com/48319383/85252269-c9303b80-b431-11ea-8885-0981dbc33349.jpg)
+<p align="center">
+  ![jumper](https://user-images.githubusercontent.com/48319383/85252269-c9303b80-b431-11ea-8885-0981dbc33349.jpg =250x250)
+</p>
  
 Fonte: Site Filipeflop
 
