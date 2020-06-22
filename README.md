@@ -107,3 +107,5 @@
   Para a conexão via MQTT, através da biblioteca do Ethernet Shield e a API do MQTT para o Arduino UNO, vamos elaborar a conexão para transferir as informações que serão passadas para a web através do Arduino, informaremos a quantidade de ração que o animal ingerir, a medida que vai diminuindo essa quantidade e o jeito que estiver configurado no software para manter no nível de ração, vai ser informado no broker criado no Node-Red se a alavanca está aberta enchendo o pote com a ração, e se o pote já está no nível configurado.
   
   Então, este procedimento que o grupo elaborou segue um padrão, a medida que o pote estiver vazio, depois de um certo tempo, vai sendo preenchido com ração a quantidade que o usuário configurar, enquanto estiver enchendo ou o animal estiver se alimentando, estas informações serão passadas para o broker Node-Red pela conexão que o Arduino vai criar quando carregar a aplicação. 
+  
+  Vídeo no YouTube - https://www.youtube.com/watch?v=-dr3U-8nBDw
