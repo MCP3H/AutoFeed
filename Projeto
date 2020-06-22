@@ -1,0 +1,137 @@
+// -- BIBLIOTECAS PARA SUPORTE AO PROJETO --
+#include <Servo.h>
+#include "HX711.h"
+#include <SPI.h>
+#include <Ethernet.h>
+#include <PubSubClient.h>
+
+// -- VARIAVEIS GLOBAIS --
+#define seconds() (millis()/1000)
+
+// CONEXAO MQTT
+byte mac[]= {  0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED };
+IPAddress ip(172, 16, 0, 100);
+IPAddress server(127, 0, 0, 1);
+void callback(char* topic, byte* payload, unsigned int length);
+void callback(char* topic, byte* payload, unsigned int length) {}
+EthernetClient ethClient;
+PubSubClient client(server, 1884, callback, ethClient);
+
+// MODULO HX711 - BALANCA
+#define DOUT  A0 
+#define CLK  A1
+HX711 balanca;
+float calibration_factor = 884000;
+float pesoInicialSemZerar = 0.157;
+float pesoDiferenca = 0.015;
+float pesoIdeal = 0.038 - pesoDiferenca;
+float peso = 0;
+
+// SERVOMOTOR - ALAVANCA
+boolean statusAlavanca = false;
+Servo myservo;
+int pos = 0;
+int tempoAtual = 0;
+int tempoAbrirAlavanca = 5;
+int tempoTotal = 0;
+bool abrirAlavanca = true;
+
+// -- SETUP --
+void setup(){
+  // PORTA SERIAL ABERTA
+  Serial.begin(9600);
+
+  // CONEXÃO MQTT
+  Ethernet.begin(mac, ip);
+  if (client.connect("arduinoClient")) {
+    client.publish("outTopic","hello world");
+    client.subscribe("mqtt");
+  }
+
+  // INICIALIZAÇÃO DA BALANÇA
+  balanca.begin(DOUT, CLK);
+  balanca.set_scale(calibration_factor);
+
+  // INICIALIZAÇÃO DO SERVO MOTOR
+  myservo.attach(7);
+  myservo.write(0);
+    
+  //CONFIGURAÇÕES INCIAIS
+  Serial.println("---- AutoFeed ----");
+  
+  Serial.print("Quantidade de ração: ");
+  Serial.print(pesoIdeal*1000);
+  Serial.println(" gramas.");
+  
+  Serial.print("Tempo para abrir a alavanca: ");
+  Serial.print(tempoAbrirAlavanca);
+  Serial.println(" segundos.");
+
+  Serial.print("Fator de Calibração: "); 
+  Serial.println(calibration_factor); 
+
+  Serial.print("Peso atual: ");
+  Serial.print(pegaPeso(),3);
+  Serial.println(" kg");
+
+  Serial.println("----------------------");
+}
+
+// -- LOOP --
+void loop(){
+  balanca.set_scale(calibration_factor);
+  peso = pegaPeso();
+  Serial.print("Peso atual: ");
+  Serial.print(peso,3);
+  Serial.println(" kg");
+  delay(500);
+  
+  if (peso < pesoIdeal){
+    abreAlavanca();
+  }else{
+    fechaAlavanca();
+  }
+    
+  client.loop();
+}
+
+
+// -- FUNÇÕES AUXILIARES --
+void zeraBalanca ()
+{
+  Serial.println();
+  balanca.tare();
+  Serial.println("Balança Zerada ");
+}
+
+void abreAlavanca() {
+  if (!statusAlavanca){
+    if (abrirAlavanca){
+      tempoAtual = seconds();
+      abrirAlavanca = false;
+    }
+    tempoTotal = tempoAtual + tempoAbrirAlavanca;
+    if (seconds() > tempoTotal){
+      for (pos = 0; pos <= 90; pos += 1) {
+        myservo.write(pos);
+        delay(10);
+      }
+      statusAlavanca = true;
+    }
+  }
+}
+
+void fechaAlavanca() {
+  if (statusAlavanca){
+    for (pos = 90; pos >= 0; pos -= 1) {
+      myservo.write(pos);
+      delay(5);
+    }
+    statusAlavanca = false;
+    abrirAlavanca = true;
+  }
+}
+
+volatile float pegaPeso() {
+  return balanca.get_units() - pesoInicialSemZerar;
+}
