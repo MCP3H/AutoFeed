@@ -9,6 +9,8 @@
   Placa composta por um microcontrolador, circuitos de entrada/saída e que pode ser facilmente conectada à um computador e programada via IDE (Integrated Development Environment, ou Ambiente de Desenvolvimento Integrado) utilizando uma linguagem baseada em C/C++, sem a necessidade de equipamentos extras além de um cabo USB, este hardware que vai ser utilizado para implantar a lógica do controle da ração, nele vão ser configurados os módulos, pinos, tara, etc.
 
 Figura 1 – Arduino Uno R3
+
+![arduinoUno](https://user-images.githubusercontent.com/48319383/85252263-c7ff0e80-b431-11ea-9a75-014a60e08873.png)
  
 Fonte: Site Filipeflop
 
@@ -17,6 +19,8 @@ Fonte: Site Filipeflop
   Uma placa de ensaio ou matriz de contato é uma placa com furos e conexões condutoras utilizada para a montagem de protótipos e projetos em estado inicial. A grande vantagem da placa de ensaio na montagem de circuitos eletrônicos é a facilidade de inserção de componentes, uma vez que não necessita soldagem.
 
 Figura 2 – Protoboard
+
+![protoboard](https://user-images.githubusercontent.com/48319383/85252271-c9c8d200-b431-11ea-814d-d130a9a79599.jpg)
  
 Fonte: Site Vida de Silício
 
@@ -25,6 +29,8 @@ Fonte: Site Vida de Silício
   Se trata de um módulo conversor e amplificador, geralmente é usado para amplificar os sinais das células de carga, possibilitando a leitura através do microcontrolador, que seria o Arduino.
 
 Figura 3 – Módulo HX711
+
+![modulohx711](https://user-images.githubusercontent.com/48319383/85252270-c9c8d200-b431-11ea-9c62-647c77a6186b.jpg)
  
 Fonte: Site Filipeflop
 
@@ -33,6 +39,8 @@ Fonte: Site Filipeflop
   Placa que permite ao Arduino se conectar a uma rede local ou a internet, para o projeto, está placa será usada para estabelecer uma conexão via MQTT, será utilizado para controlar o nível da quantidade de ração, e passar informações a respeito da quantidade que o animal já ingeriu.
 
 Figura 4 – Ethernet Shield
+
+![ethernetShield](https://user-images.githubusercontent.com/48319383/85252266-c9303b80-b431-11ea-8876-a6859b1fa256.jpg)
  
 Fonte: Site Filipeflop
 
@@ -41,6 +49,8 @@ Fonte: Site Filipeflop
   Transdutor de força, medida a partir da deformação que ocorre ao materialé um transdutor de força. A força é medida de forma indireta, normalmente relacionando-a com a resposta de algum material à aplicação de carga (mudança de pressão, deformação etc.). É muito utilizada por ser muito precisa e ser muito versátil em relação ao tamanho das cargas aplicadas, será introduzido embaixo do pote de ração do animal.
 
 Figura 5 – Célula de Carga (1KG)
+
+![celulaCarga](https://user-images.githubusercontent.com/48319383/85252265-c897a500-b431-11ea-8800-bfa4603b3381.jpg)
  
 Fonte: Site Magazine Luiza
 
@@ -49,6 +59,8 @@ Fonte: Site Magazine Luiza
   Motor na qual podemos controlar sua posição angular através de um sinal PWM, atuador eletromecânico, usado para manter e posicionar um determinado objeto, vai ser usado para controlar a alavanca do controle da ração.
 
 Figura 6 – Micro Servo Motor
+
+![servomotor](https://user-images.githubusercontent.com/48319383/85252273-ca616880-b431-11ea-9dcf-79a37cb01220.jpg)
  
 Fonte: Site Vida de Silício
 
@@ -57,6 +69,8 @@ Fonte: Site Vida de Silício
   Peça plástica que contém um pequeno filamento de metal responsável pela condução de eletricidade. De acordo com a disposição destas peças nos chamados pinos, o fluxo de eletricidade é desviado, ativando configurações distintas, utilizado para estabelecer a comunicação entre os elementos no Arduino.
 
 Figura 7 - Jumpers
+
+![jumper](https://user-images.githubusercontent.com/48319383/85252269-c9303b80-b431-11ea-8885-0981dbc33349.jpg)
  
 Fonte: Site Filipeflop
 
