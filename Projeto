@@ -1,6 +1,9 @@
 // -- BIBLIOTECAS PARA SUPORTE AO PROJETO --
+// Biblioteca usada para o servo motor
 #include <Servo.h>
+// Biblioteca usada para a balança
 #include "HX711.h"
+// Biblioteca usada para a conexão MQTT
 #include <SPI.h>
 #include <Ethernet.h>
 #include <PubSubClient.h>
@@ -9,13 +12,14 @@
 #define seconds() (millis()/1000)
 
 // CONEXAO MQTT
-byte mac[]= {  0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED };
-IPAddress ip(172, 16, 0, 100);
-IPAddress server(127, 0, 0, 1);
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+IPAddress ip(192, 168, 0, 100);
+char* server = "broker.hivemq.com";
 void callback(char* topic, byte* payload, unsigned int length);
-void callback(char* topic, byte* payload, unsigned int length) {}
 EthernetClient ethClient;
-PubSubClient client(server, 1884, callback, ethClient);
+PubSubClient mqttClient(server, 1883, callback, ethClient);
+int pinLedVerde = 5;
+int pinLedVermelho = 6;
 
 // MODULO HX711 - BALANCA
 #define DOUT  A0 
@@ -35,18 +39,13 @@ int tempoAtual = 0;
 int tempoAbrirAlavanca = 5;
 int tempoTotal = 0;
 bool abrirAlavanca = true;
+int tempoPeso = 5;
+int pesoInfo = 5;
 
 // -- SETUP --
 void setup(){
   // PORTA SERIAL ABERTA
   Serial.begin(9600);
-
-  // CONEXÃO MQTT
-  Ethernet.begin(mac, ip);
-  if (client.connect("arduinoClient")) {
-    client.publish("outTopic","hello world");
-    client.subscribe("mqtt");
-  }
 
   // INICIALIZAÇÃO DA BALANÇA
   balanca.begin(DOUT, CLK);
@@ -55,6 +54,22 @@ void setup(){
   // INICIALIZAÇÃO DO SERVO MOTOR
   myservo.attach(7);
   myservo.write(0);
+
+  // LEDS
+  pinMode(pinLedVerde, OUTPUT);
+  pinMode(pinLedVermelho, OUTPUT);
+  digitalWrite(pinLedVermelho, HIGH);
+  
+  // CONEXÃO MQTT
+  Ethernet.begin(mac, ip);
+  delay(3000);
+  mqttClient.setServer(server, 1883);
+  if (mqttClient.connect("AutoFeed")) {
+    mqttClient.publish("conexao","Conexão estabelecida com o servidor!!");
+    mqttClient.subscribe("broker");
+  }else{
+    Serial.println("Não foi possível estabelecer conexão com o servidor!!");
+  }
     
   //CONFIGURAÇÕES INCIAIS
   Serial.println("---- AutoFeed ----");
@@ -67,7 +82,11 @@ void setup(){
   Serial.print(tempoAbrirAlavanca);
   Serial.println(" segundos.");
 
-  Serial.print("Fator de Calibração: "); 
+  Serial.print("Tempo para enviar peso ao servidor: ");
+  Serial.print(tempoPeso);
+  Serial.println(" segundos.");
+
+  Serial.print("Fator de calibração: "); 
   Serial.println(calibration_factor); 
 
   Serial.print("Peso atual: ");
@@ -79,20 +98,33 @@ void setup(){
 
 // -- LOOP --
 void loop(){
+  //Manter conexão com servidor
+  mqttClient.loop();
+
+  // Calibra e pega peso da balança
   balanca.set_scale(calibration_factor);
   peso = pegaPeso();
-  Serial.print("Peso atual: ");
-  Serial.print(peso,3);
-  Serial.println(" kg");
-  delay(500);
-  
+
+  //Caso tenha passado o tempo configurado, envia mensagem para o servidor
+  if (seconds() > pesoInfo) {
+    Serial.print("Peso atual: ");
+    Serial.print(peso,3);
+    Serial.println(" kg");
+    char result[8];
+    dtostrf(peso*1000, 6, 2, result);
+    mqttClient.publish("pesoPote",result);
+    pesoInfo = seconds() + tempoPeso;
+  }
+ 
+  // Caso o peso seja maior que o que foi configurado pelo usuário, a alavanca é aberta, se não mantém fechada
   if (peso < pesoIdeal){
     abreAlavanca();
   }else{
     fechaAlavanca();
   }
-    
-  client.loop();
+
+  // Delay para não sobrecarregar o servidor
+  delay(500);
 }
 
 
@@ -110,8 +142,10 @@ void abreAlavanca() {
       tempoAtual = seconds();
       abrirAlavanca = false;
     }
+    //Antes de abrir a alavanca, é aguardado um tempo configurado pelo usuário
     tempoTotal = tempoAtual + tempoAbrirAlavanca;
     if (seconds() > tempoTotal){
+      mqttClient.publish("statusAlavanca","Alavanca foi aberta!!");
       for (pos = 0; pos <= 90; pos += 1) {
         myservo.write(pos);
         delay(10);
@@ -123,6 +157,7 @@ void abreAlavanca() {
 
 void fechaAlavanca() {
   if (statusAlavanca){
+    mqttClient.publish("statusAlavanca","Alavanca foi fechada!!");
     for (pos = 90; pos >= 0; pos -= 1) {
       myservo.write(pos);
       delay(5);
@@ -134,4 +169,26 @@ void fechaAlavanca() {
 
 volatile float pegaPeso() {
   return balanca.get_units() - pesoInicialSemZerar;
+}
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  String opcao = getCommand(payload, length);
+  
+  if (opcao == "conectado"){
+    //Ao receber mensagem do broker, ajuste o led verde
+    digitalWrite(pinLedVerde, HIGH);
+    digitalWrite(pinLedVermelho, LOW);
+    Serial.println("Conexão estabelecida com o Node-Red!!");
+    Serial.println("----------------------");
+  }
+  
+}
+
+String getCommand(byte* payload, unsigned int length){
+  String command;
+  for(int i=0; i<length; i++)
+  {
+     command = command + (char)payload[i];
+  }
+  return command;
 }
