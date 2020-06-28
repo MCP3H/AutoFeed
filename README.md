@@ -1,6 +1,10 @@
 # AutoFeed
 
-  Essa é um proposta de automação na alimentação de animais domésticos, através da configuração de nível da quantidade de ração dentro do pote, que também será utilizado como balança. Caso o animal doméstico se alimente de uma certa quantidade de ração, e o nível passe o número configurado, depois de um determinado tempo a alavanca do molde será reaberta, permitindo o preenchimento de ração do pote, quando chegar o nivel configurado a alavanca do pote será fechada.
+  Essa é um proposta de automação na alimentação de animais domésticos, através da configuração de nível da quantidade de ração dentro do pote, que também será utilizado como balança. Caso o animal doméstico se alimente de uma certa quantidade de ração, e o nível passe o número configurado, depois de um determinado tempo a alavanca do molde será reaberta, permitindo o preenchimento de ração do pote, quando chegar o nivel configurado a alavanca do pote será fechada, em todo processo será mantido conexão com a internet via MQTT para troca de informações, abaixo segue um fluxograma do projeto:
+  
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48025235/85958885-785b9e00-b96f-11ea-9d3f-38bc1700e5df.png" width="1000">
+</p>
   
   Por se tratar de uma aplicação desenvolvida no Arduino Uno, utilizamos materiais específicos da plataforma eletrônica para a construção do suporte, segue abaixo uma lista dos elementos que serão usados e suas respectivas funções:
 
