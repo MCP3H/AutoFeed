@@ -102,10 +102,25 @@
   Fonte: Site Filipeflop
 </p>
 
-  Para a elaboração do software em relação ao molde, usaremos as documentações dos materiais específicos que foram selecionados, a biblioteca do módulo HX711 é capaz de tratar e medir a quantidade de ração dentro do pote, e com essa informação, identificaremos a diferença que irá gerar após o animal ingerir uma certa quantidade de ração. Utilizaremos a biblioteca Servo para controlar o servo motor, e incluir o método responsável por levantar e abaixar a alavanca quando chegar a um determinado nível de ração.
+# LEDs
+
+  Componente eletrônico semicondutor, ou seja, um diodo emissor de luz (L.E.D = Light emitter diode ), mesma tecnologia utilizada nos chips dos computadores, que tem a propriedade de transformar energia elétrica em luz.
+
+<p align="center">
+  Figura 7 - LEDs
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/48025235/85958551-abe8f900-b96c-11ea-8024-a8b09e21cb9e.png" width="250">
+</p>
+<p align="center">
+  Fonte: Site Eagle Robotics
+</p>
+
+  Para a elaboração do software (Tópico Projeto no GitHub) em relação ao molde, usaremos as documentações dos materiais específicos que foram selecionados, a biblioteca do módulo HX711 é capaz de tratar e medir a quantidade de ração dentro do pote, e com essa informação, identificaremos a diferença que irá gerar após o animal ingerir uma certa quantidade de ração. Utilizaremos a biblioteca Servo para controlar o servo motor, e incluir o método responsável por levantar e abaixar a alavanca quando chegar a um determinado nível de ração.
   
-  Para a conexão via MQTT, através da biblioteca do Ethernet Shield e a API do MQTT para o Arduino UNO, vamos elaborar a conexão para transferir as informações que serão passadas para a web através do Arduino, informaremos a quantidade de ração que o animal ingerir, a medida que vai diminuindo essa quantidade e o jeito que estiver configurado no software para manter no nível de ração, vai ser informado no broker criado no Node-Red se a alavanca está aberta enchendo o pote com a ração, e se o pote já está no nível configurado.
+  Para a conexão via MQTT, através da biblioteca do Ethernet Shield e a API do MQTT para o Arduino UNO, vamos elaborar a conexão em um broker público da HiveMQ para transferir os dados do Arduino, em seguida vamos configurar esse broker na ferramenta Node-Red (Acesse o link para instalação da ferramenta: https://nodered.org/docs/getting-started/local)(Arquivo do projeto para importar: flows.js), está ferramenta será utilizada no projeto para captar essas informações e realizar determinada ação, enquanto não houver conexão será aceso um LED vermelho, e quando estabilizar a conexão com o Arduino, após o Node-Red receber essa informação, será disparada uma trigger que envia uma informação de volta ao Arduino para acender o LED verde e apagar o vermelho, caso a alavanca esteja sendo aberta ou fechada, a informação também será enviada ao Node-Red, e durante todo esse processo, os dados do peso da balança serão enviados do Arduino para o Node-Red em intervalos de segundos, isto vai depender da configuração do usuário, estes dados serão utilizados para a construção de um dashboard dentro da ferramenta, este dashboard será constituído de um gráfico que apresenta a quantidade de ração em gramas a partir do tempo, além de que será necessário instalar a biblioteca node-red-dashboard para manipular o gráfico. (Para acessar o gráfico após as configurações:  http://localhost:1880/ui).
   
-  Então, este procedimento que o grupo elaborou segue um padrão, a medida que o pote estiver vazio, depois de um certo tempo, vai sendo preenchido com ração a quantidade que o usuário configurar, enquanto estiver enchendo ou o animal estiver se alimentando, estas informações serão passadas para o broker Node-Red pela conexão que o Arduino vai criar quando carregar a aplicação. 
+  Então, este procedimento que o grupo elaborou segue um padrão, a medida que o pote estiver vazio, depois de um certo tempo, vai sendo preenchido com ração a quantidade que o usuário configurar, enquanto estiver enchendo ou o animal estiver se alimentando, estas informações serão passadas para o broker, em seguida a ferramenta Node-Red vai ajustando o gráfico.
+
   
   Vídeo no YouTube - https://www.youtube.com/watch?v=-dr3U-8nBDw
