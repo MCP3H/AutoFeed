@@ -127,4 +127,4 @@
   Então, este procedimento que o grupo elaborou segue um padrão, a medida que o pote estiver vazio, depois de um certo tempo, vai sendo preenchido com ração a quantidade que o usuário configurar, enquanto estiver enchendo ou o animal estiver se alimentando, estas informações serão passadas para o broker, em seguida a ferramenta Node-Red vai ajustando o gráfico.
 
   
-  Vídeo no YouTube - https://www.youtube.com/watch?v=-dr3U-8nBDw
+  Vídeo no YouTube - https://www.youtube.com/watch?v=Eklr0OESJV8
